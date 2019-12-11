@@ -29,13 +29,13 @@ pygame.mixer.init()
 pygame.mixer.music.load("HoaTrongCamQuan.mp3") 
 #os.environ['SDL_VIDEO_CENTERED'] = '1' # Center the screen 
 sound = pygame.mixer.Sound('click.wav')
-menu_image =pygame.image.load(os.pen.join("Images","background.png"))
-ingame_image = pygame.image.load(os.pen.join("Images/IngameBG","1.png"))
-board_image = pygame.image.load(os.pen.join("Images/IngameBG","board1.png"))
-redo_undo_image = pygame.image.load(os.pen.join("Images","R-U.png"))
-replay_image = pygame.image.load(os.pen.join("Images","RE.png"))
-rule1_image = pygame.image.load(os.pen.join("Images/Rule","Rule1_2.png"))
-rule2_image = pygame.image.load(os.pen.join("Images/Rule","Rule2_2.png"))
+menu_image =pygame.image.load(os.path.join("Images","background.png"))
+ingame_image = pygame.image.load(os.path.join("Images/IngameBG","1.png"))
+board_image = pygame.image.load(os.path.join("Images/IngameBG","board1.png"))
+redo_undo_image = pygame.image.load(os.path.join("Images","R-U.png"))
+replay_image = pygame.image.load(os.path.join("Images","RE.png"))
+rule1_image = pygame.image.load(os.path.join("Images/Rule","Rule1_2.png"))
+rule2_image = pygame.image.load(os.path.join("Images/Rule","Rule2_2.png"))
 pygame.init()
 FPS = 240
 # <-- DISPLAY --> #
@@ -45,13 +45,13 @@ Music_mode = 3
 choose = 0 
 player_text = pygame.font.Font(None,50)	
 # <-- O images --> #
-o_images = [pygame.image.load(os.pen.join("Images/Balls",str(i)+".png")) for i in range (1,16) ]
+o_images = [pygame.image.load(os.path.join("Images/Balls",str(i)+".png")) for i in range (1,16) ]
 
 # <-- X images --> #
-x_images = [pygame.image.load(os.pen.join("Images/X",str(i) + ".png")) for i in range(1,9) ]
+x_images = [pygame.image.load(os.path.join("Images/X",str(i) + ".png")) for i in range(1,9) ]
 
 # <-- Avatar --> #
-Avatar = [pygame.image.load(os.pen.join("Images/Avatar",str(i)+"`.png")) for i in range(1,9)]
+Avatar = [pygame.image.load(os.path.join("Images/Avatar",str(i)+"`.png")) for i in range(1,9)]
 
 # <-- Menu --> #
 def menu(music = 0):	
@@ -279,6 +279,7 @@ def AttPrDiag(x_, y_):
 	Point -= Defense[Enemy+1] * 3
 	Point += Attack[Bot]
 	return Point
+# <-- Defense --> #
 def DefRows(x_, y_):
 	Point = 0
 	Enemy = 0
@@ -462,7 +463,7 @@ def Rule(rule):
 		DISPLAY.blit(rule1_image,(816,20))
 	
 def undo(count):
-	undo_image = pygame.image.load(os.pen.join("Images","UNDO.png"))
+	undo_image = pygame.image.load(os.path.join("Images","UNDO.png"))
 	DISPLAY.blit(undo_image,(1093,31))	
 	pygame.display.update()							
 	pygame.time.delay(50)
@@ -494,7 +495,7 @@ def undo(count):
 		return count + 1
 
 def replay():
-	DISPLAY.blit(pygame.image.load(os.pen.join("Images","RE1.png")),(100,100))
+	DISPLAY.blit(pygame.image.load(os.path.join("Images","RE1.png")),(100,100))
 	pygame.display.update()
 	display()
 	time = 500
@@ -560,7 +561,7 @@ def save_game():
 	# <-- PVP mode --> #
 	if choose == 1:
 		print("GAME SAVED!")
-		if (os.pen.isfile('./SAVE.txt')):
+		if (os.path.isfile('./SAVE.txt')):
 			os.remove("SAVE.txt")
 		file = open("SAVE.txt","a+")
 		for i in range(0,len(player1)):
@@ -579,7 +580,7 @@ def save_game():
 	# <-- PVB mode --> #
 	else:
 		print("GAME SAVED!")
-		if (os.pen.isfile('./SAVE_BOT.txt')): # Check if file exists
+		if (os.path.isfile('./SAVE_BOT.txt')): # Check if file exists
 			os.remove("SAVE_BOT.txt")
 		file = open("SAVE_BOT.txt","a+")
 		for i in range(0,len(player1)):
@@ -599,7 +600,7 @@ def save_game():
 def load_game():
 	global player1,player2, bot1
 	if choose == 1:
-		if (os.pen.isfile('./SAVE.txt')):
+		if (os.path.isfile('./SAVE.txt')):
 			f = open("SAVE.txt","r+")		
 			print("SUCCEED")				
 			display()
@@ -616,7 +617,7 @@ def load_game():
 			pygame.display.update()
 			pygame.time.wait(100)
 	if choose == 2:
-		if (os.pen.isfile('./SAVE_BOT.txt')) == True: # Check if file exists
+		if (os.path.isfile('./SAVE_BOT.txt')) == True: # Check if file exists
 			f = open("SAVE_BOT.txt","r+")	
 			display()			
 			p1 = f.readline().split()
@@ -687,11 +688,11 @@ while True:
 
 		# <-- IMAGE LOADING MUST BE OUT OF "FOR LOOPS" ABOVE. OTHEWISE, THE RESPONDING OF IMAGES WILL BE INTERRUPTED --> #
 		if pygame.Rect((390,565),(590, 100)).collidepoint(pygame.mouse.get_pos()):		
-			PVP = pygame.image.load(os.pen.join("Images","Multiplayer.png"))
+			PVP = pygame.image.load(os.path.join("Images","Multiplayer.png"))
 			DISPLAY.blit(PVP,(392,562))
 
 		if pygame.Rect((390,395),(590, 100)).collidepoint(pygame.mouse.get_pos()):
-			PVB = pygame.image.load(os.pen.join("Images","Singleplayer.png"))
+			PVB = pygame.image.load(os.path.join("Images","Singleplayer.png"))
 			DISPLAY.blit(PVB,(392,398))		
 
 		if choose != 0:
@@ -717,30 +718,30 @@ while True:
 
 			# <-- Save game --> #
 			if pygame.Rect((253,20),(100, 40)).collidepoint(pygame.mouse.get_pos()):
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","SAVE.png")),(253,20))
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","SAVE.png")),(253,20))
 				pygame.display.update()
 				if event.type == pygame.MOUSEBUTTONDOWN:				
 					sound.play()
 					save_game()
 			else:	
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","SAVE1.png")),(253 ,20))
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","SAVE1.png")),(253 ,20))
 
 			# <-- Load game --> #
 			if pygame.Rect((336,20),(100, 40)).collidepoint(pygame.mouse.get_pos()):
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","LOAD.png")),(336,20))
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","LOAD.png")),(336,20))
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					load_game()	
 			else:	
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","LOAD1.png")),(336,20))	
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","LOAD1.png")),(336,20))	
 
 			# <-- Back to menu -->
 			if pygame.Rect((12,12),(195, 65)).collidepoint(pygame.mouse.get_pos()):			
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","BTM1.png")),(11,13))				
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","BTM1.png")),(11,13))				
 				if event.type == pygame.MOUSEBUTTONUP:
 					sound.play()					
 					choose = 0
 			else:
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","BTM.png")),(11,13))	
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","BTM.png")),(11,13))	
 
 			# <-- Undo --> #
 			if pygame.Rect((1093,31),(52, 60)).collidepoint(pygame.mouse.get_pos()):			
@@ -755,7 +756,7 @@ while True:
 			if pygame.Rect((1150,31),(50, 60)).collidepoint(pygame.mouse.get_pos()):					
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					sound.play()
-					DISPLAY.blit(pygame.image.load(os.pen.join("Images","REDO.png")),(1093,31))	
+					DISPLAY.blit(pygame.image.load(os.path.join("Images","REDO.png")),(1093,31))	
 					pygame.display.update()
 					pygame.time.wait(100)
 					display()		
@@ -900,12 +901,12 @@ while True:
 			DISPLAY.blit(text, (WIDTH/2-50,50))
 		# <-- When music ends --> #
 		if Music_mode%2 == 0:
-			DISPLAY.blit(pygame.image.load(os.pen.join("Images","VO.png")),(0,0))
+			DISPLAY.blit(pygame.image.load(os.path.join("Images","VO.png")),(0,0))
 			if pygame.mixer.music.get_busy() == False :
 				pygame.mixer.music.load("HoaTrongCamQuan.mp3")
 				pygame.mixer.music.play()
 		else:
-			DISPLAY.blit(pygame.image.load(os.pen.join("Images","VO_X.png")),(0,0))
+			DISPLAY.blit(pygame.image.load(os.path.join("Images","VO_X.png")),(0,0))
 # <-- Player VS Bot -->
 	if choose == 2:
 		DISPLAY.blit(Avatar[avatar_random], (MIN_WIDTH-200,HEIGHT/5))
@@ -921,29 +922,29 @@ while True:
 					Music_mode+=1
 			# <-- Save game --> #
 			if pygame.Rect((253,20),(100, 40)).collidepoint(pygame.mouse.get_pos()):
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","SAVE.png")),(253,20))
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","SAVE.png")),(253,20))
 				pygame.display.update()
 				if event.type == pygame.MOUSEBUTTONDOWN:				
 					sound.play()
 					save_game()
 			else:	
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","SAVE1.png")),(253 ,20))
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","SAVE1.png")),(253 ,20))
 			# <-- Load game --> #
 			if pygame.Rect((336,20),(100, 40)).collidepoint(pygame.mouse.get_pos()):
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","LOAD.png")),(336,20))
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","LOAD.png")),(336,20))
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					load_game()	
 			else:	
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","LOAD1.png")),(336,20))	
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","LOAD1.png")),(336,20))	
 
 			# <-- Back to menu -->
 			if pygame.Rect((12,12),(195, 65)).collidepoint(pygame.mouse.get_pos()):			
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","BTM1.png")),(11,13))				
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","BTM1.png")),(11,13))				
 				if event.type == pygame.MOUSEBUTTONUP:
 					sound.play()					
 					choose = 0
 			else:
-				DISPLAY.blit(pygame.image.load(os.pen.join("Images","BTM.png")),(11,13))	
+				DISPLAY.blit(pygame.image.load(os.path.join("Images","BTM.png")),(11,13))	
 
 			# <-- Undo -->
 			if pygame.Rect((1093,31),(52, 60)).collidepoint(pygame.mouse.get_pos()):	
@@ -956,7 +957,7 @@ while True:
 			if pygame.Rect((1150,31),(50, 60)).collidepoint(pygame.mouse.get_pos()):					
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					sound.play()
-					DISPLAY.blit(pygame.image.load(os.pen.join("Images","REDO.png")),(1093,31))	
+					DISPLAY.blit(pygame.image.load(os.path.join("Images","REDO.png")),(1093,31))	
 					pygame.display.update()
 					pygame.time.wait(100)
 					display()		
@@ -1012,7 +1013,7 @@ while True:
 					bot()
 				count +=  2
 				redo_save = 0
-			# <-- When wins --> #
+			# <-- When wins --> 
 			if win == 1:
 				if event.type == pygame.KEYDOWN and win == 1:		
 					if event.key == pygame.K_x:
@@ -1093,12 +1094,12 @@ while True:
 
 		# <-- When music ends --> #
 		if Music_mode%2 == 0:
-			DISPLAY.blit(pygame.image.load(os.pen.join("Images","VO.png")),(0,0))
+			DISPLAY.blit(pygame.image.load(os.path.join("Images","VO.png")),(0,0))
 			if pygame.mixer.music.get_busy() == False :
 				pygame.mixer.music.load("HoaTrongCamQuan.mp3")
 				pygame.mixer.music.play()
 		else:
-			DISPLAY.blit(pygame.image.load(os.pen.join("Images","VO_X.png")),(0,0))
+			DISPLAY.blit(pygame.image.load(os.path.join("Images","VO_X.png")),(0,0))
 	clock.tick(FPS)
 	pygame.display.flip()
 
