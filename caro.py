@@ -907,6 +907,7 @@ while True:
 				pygame.mixer.music.play()
 		else:
 			DISPLAY.blit(pygame.image.load(os.path.join("Images","VO_X.png")),(0,0))
+			pygame.mixer.music.stop()
 # <-- Player VS Bot -->
 	if choose == 2:
 		DISPLAY.blit(Avatar[avatar_random], (MIN_WIDTH-200,HEIGHT/5))
@@ -1100,6 +1101,7 @@ while True:
 				pygame.mixer.music.play()
 		else:
 			DISPLAY.blit(pygame.image.load(os.path.join("Images","VO_X.png")),(0,0))
+			pygame.mixer.music.stop()
 	clock.tick(FPS)
 	pygame.display.flip()
 
